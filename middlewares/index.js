@@ -2,4 +2,6 @@ const validateBody = require("./validateBody");
 
 const validateById = require("./validateById");
 
-module.exports = { validateBody, validateById };
+const authenticate = require("./authenticate");
+
+module.exports = { validateBody, validateById, authenticate };
