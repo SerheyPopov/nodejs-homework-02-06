@@ -3,7 +3,7 @@ const { login } = require("./auth/login");
 const { getCurrent } = require("./auth/current");
 const { logout } = require("./auth/logout");
 const { subscription } = require("./auth/subscription");
-const {updateAvatar}=require("./auth/updateAvatar")
+const { updateAvatar } = require("./auth/updateAvatar");
 
 const { getAll } = require("./contacts/getAll");
 const { getById } = require("./contacts/getById");

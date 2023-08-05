@@ -1,22 +1,29 @@
 const path = require("path");
 const fs = require("fs/promises");
+const Jimp = require("jimp");
 
 const { ctrlWrapper } = require("../../helpers");
 const { User } = require("../../models");
 
 const avatarsDir = path.join(__dirname, "../../", "public", "avatars");
-console.log(avatarsDir, "78222")
 
 const updateAvatar = async (req, res) => {
 	const { _id } = req.user;
-	const { path: tempUpload, originalName } = req.file;
-	const resultUpload = path.join(avatarsDir, originalName);
+	const { path: tempUpload, originalname } = req.file;
+	const filename = `${_id}_${originalname}`;
+	const resultUpload = path.join(avatarsDir, filename);
 	await fs.rename(tempUpload, resultUpload);
-	const avatarUrl = path.join("avatars", originalName);
-	await User.findByIdAndUpdate(_id, { avatarUrl });
+	const avatarURL = path.join("avatars", filename);
+
+	const image = await Jimp.read(resultUpload);
+	await image.resize(250, 250).quality(60).writeAsync(resultUpload);
+
+	await User.findByIdAndUpdate(_id, { avatarURL });
 
 	res.json({
-		avatarUrl,
+		status: "ok",
+		code: "200",
+		user: { avatar: avatarURL },
 	});
 };
 
