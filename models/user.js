@@ -20,8 +20,15 @@ const userShema = new Schema(
 			default: "starter",
 		},
 		avatarURL: String,
-
 		token: String,
+		verify: {
+			type: Boolean,
+			default: false,
+		},
+		verificationToken: {
+			type: String,
+			default: "",
+		},
 	},
 	{ versionKey: false, timestamps: true }
 );
@@ -32,6 +39,10 @@ const registrationShema = Joi.object({
 	email: Joi.string().required(),
 	password: Joi.string().required(),
 	subscription: Joi.string(),
+});
+
+const emailShema = Joi.object({
+	email: Joi.string().required(),
 });
 
 const loginShema = Joi.object({
@@ -46,6 +57,7 @@ const shemas = {
 	registrationShema,
 	loginShema,
 	statusShema,
+	emailShema,
 };
 
 const User = model("user", userShema);

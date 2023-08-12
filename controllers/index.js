@@ -4,6 +4,8 @@ const { getCurrent } = require("./auth/current");
 const { logout } = require("./auth/logout");
 const { subscription } = require("./auth/subscription");
 const { updateAvatar } = require("./auth/updateAvatar");
+const { verifyEmail } = require("./auth/verifyEmail");
+const { recendVerifyEmail } = require("./auth/recendVerifyEmail");
 
 const { getAll } = require("./contacts/getAll");
 const { getById } = require("./contacts/getById");
@@ -25,4 +27,6 @@ module.exports = {
 	updateStatusContact,
 	subscription,
 	updateAvatar,
+	verifyEmail,
+	recendVerifyEmail,
 };
